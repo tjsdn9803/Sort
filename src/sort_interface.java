@@ -1,4 +1,4 @@
-public interface sort_interface extends Data{
+public interface sort_interface extends Data_interface{
     public int[] Bubble_sort();
     public int[] Selection_sort();
     public int[] Insertion_sort();
