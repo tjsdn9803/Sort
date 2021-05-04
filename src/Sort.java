@@ -119,14 +119,14 @@ public class Sort implements sort_interface{
 
     @Override
     public int[] Shell_sort_Ciura(int []arr) {//ciura 시퀀스 이용
-        int[] Ciura_Sequence = new int[]{1,4,10,23,57,132,301,701,1750};
+        int[] Ciura_Sequence = new int[]{1,4,10,23,57,132,301,701,1750,3937,8858,19930,44842,100894};
         int gap;
         int gap_index=0;
         int len = (int)(arr.length/2.25);
         while(Ciura_Sequence[gap_index] <= len){
             gap_index++;
         }
-        while(gap_index>1){
+        while(gap_index>0){
             gap = Ciura_Sequence[gap_index];
             for(int i=0;i<gap;i++){
                 for(int j=i+gap;j<arr.length;j += gap){
@@ -143,7 +143,7 @@ public class Sort implements sort_interface{
         }
         return arr;
     }
-    public void print_arr(int[] arr){
+    public void print_arr(int[] arr){// 배열 출력
         for(int i=0;i<arr.length;i++){
             System.out.print(arr[i]+" ");
         }
@@ -155,30 +155,75 @@ public class Sort implements sort_interface{
         System.out.println("배열의 갯수 입력");
         n = s.nextInt();
         Sort sort = new Sort(n);
-
+        long start,end;
         System.out.println("----------랜덤 데이터 배열----------");
         int []rand_data = sort.Random_data();
-        sort.print_arr(sort.Bubble_sort(rand_data));
-        sort.print_arr(sort.Selection_sort(rand_data));
-        sort.print_arr(sort.Insertion_sort(rand_data));
-        sort.print_arr(sort.Shell_sort(rand_data));
-        sort.print_arr(sort.Shell_sort_Ciura(rand_data));
+        start = System.currentTimeMillis();
+        sort.Bubble_sort(rand_data);
+        end = System.currentTimeMillis();
+        System.out.println("버블정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Selection_sort(rand_data);
+        end = System.currentTimeMillis();
+        System.out.println("선택정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Insertion_sort(rand_data);
+        end = System.currentTimeMillis();
+        System.out.println("삽입정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort(rand_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort_Ciura(rand_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬(Ciura)의 실행시간: "+(end-start));
 
         System.out.println("----------내림차순 데이터 배열----------");
         int []Descend_data = sort.Descended_data();
-        sort.print_arr(sort.Bubble_sort(Descend_data));
-        sort.print_arr(sort.Selection_sort(Descend_data));
-        sort.print_arr(sort.Insertion_sort(Descend_data));
-        sort.print_arr(sort.Shell_sort(Descend_data));
-        sort.print_arr(sort.Shell_sort_Ciura(Descend_data));
+        start = System.currentTimeMillis();
+        sort.Bubble_sort(Descend_data);
+        end = System.currentTimeMillis();
+        System.out.println("버블정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Selection_sort(Descend_data);
+        end = System.currentTimeMillis();
+        System.out.println("선택정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Insertion_sort(Descend_data);
+        end = System.currentTimeMillis();
+        System.out.println("삽입정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort(Descend_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort_Ciura(Descend_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬(Ciura)의 실행시간: "+(end-start));
 
         System.out.println("----------느슨한 정렬된 데이터 배열----------");
         int []Sorted_data = sort.Sorted_data();
-        sort.print_arr(sort.Bubble_sort(Sorted_data));
-        sort.print_arr(sort.Selection_sort(Sorted_data));
-        sort.print_arr(sort.Insertion_sort(Sorted_data));
-        sort.print_arr(sort.Shell_sort(Sorted_data));
-        sort.print_arr(sort.Shell_sort_Ciura(Sorted_data));
+        start = System.currentTimeMillis();
+        sort.Bubble_sort(Sorted_data);
+        end = System.currentTimeMillis();
+        System.out.println("버블정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Selection_sort(Sorted_data);
+        end = System.currentTimeMillis();
+        System.out.println("선택정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Insertion_sort(Sorted_data);
+        end = System.currentTimeMillis();
+        System.out.println("삽입정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort(Sorted_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬의 실행시간: "+(end-start));
+        start = System.currentTimeMillis();
+        sort.Shell_sort_Ciura(Sorted_data);
+        end = System.currentTimeMillis();
+        System.out.println("쉘정렬(Ciura)의 실행시간: "+(end-start));
     }
 
 
