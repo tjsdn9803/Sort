@@ -12,137 +12,136 @@ public class Sort implements sort_interface{
     }
 
     @Override
-    public void Set_data(){//0~80의 n개의값을 가진 배열 생성
+    public int[] Random_data(){//0~80의 n개의값을 가진 배열 생성
         Random r = new Random();
         int[] Random_data = new int[n];
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n;i++) {
             Random_data[i] = r.nextInt(30);
         }
         this.Data = Random_data;
+        return Random_data;
     }
     @Override
-    public void Descended_data() {
-        Arrays.sort(Data);
-        int [] temp = new int[n];
-        for(int i=0;i<n;i++){
-            temp[i] = Data[n-i-1];
+    public int[] Descended_data(){
+        int[] Ascended_data = this.Data;
+        Arrays.sort(Ascended_data);
+        int[] Descended_data = new int[Ascended_data.length];
+        for(int i=0;i<Descended_data.length;i++){
+            Descended_data[i] = Ascended_data[Descended_data.length-i-1];
         }
-        this.Data = temp;
+        return Descended_data;
     }
 
     @Override
-    public void Sorted_data() {//쉘정렬 1회전
-        int gap = Data.length;
+    public int[] Sorted_data() {//쉘정렬 1회전
+        int[] Sorted_data = this.Data;
+        int gap = Sorted_data.length;
         gap = (gap/3)+1;
         for(int i=0;i<gap;i++){
-            for(int j=i+gap;j<Data.length;j += gap){
+            for(int j=i+gap;j<Sorted_data.length;j += gap){
                 for(int k=i;k<j;k+=gap){
-                    if(Data[k] > Data[j]){
-                        int temp = Data[k];
-                        Data[k] = Data[j];
-                        Data[j] = temp;
+                    if(Sorted_data[k] > Sorted_data[j]){
+                        int temp = Sorted_data[k];
+                        Sorted_data[k] = Sorted_data[j];
+                        Sorted_data[j] = temp;
                     }
                 }
             }
         }
+        return Sorted_data;
     }
 
     @Override
-    public int[] Bubble_sort() {
-        int[] Bubble_arr = Data;
-        for(int i=0;i<Bubble_arr.length;i++){
-            for(int j=0;j<Bubble_arr.length-i-1;j++){
-                if(Bubble_arr[j] > Bubble_arr[j+1]){
-                    int temp = Bubble_arr[j+1];
-                    Bubble_arr[j+1] = Bubble_arr[j];
-                    Bubble_arr[j] = temp;
+    public int[] Bubble_sort(int []arr) {
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr.length-i-1;j++){
+                if(arr[j] > arr[j+1]){
+                    int temp = arr[j+1];
+                    arr[j+1] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
-        return Bubble_arr;
+        return arr;
     }
 
     @Override
-    public int[] Selection_sort() {
-        int[] Selection_arr = Data;
+    public int[] Selection_sort(int []arr) {
         int min_index;
 
-        for(int i=0;i<Selection_arr.length;i++){
+        for(int i=0;i<arr.length;i++){
             min_index = i;
-            for(int j=i+1;j<Selection_arr.length;j++){
-                if(Selection_arr[min_index] > Selection_arr[j]){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[min_index] > arr[j]){
                     min_index = j;
                 }
             }
-            int temp = Selection_arr[min_index];
-            Selection_arr[min_index] = Selection_arr[i];
-            Selection_arr[i] = temp;
+            int temp = arr[min_index];
+            arr[min_index] = arr[i];
+            arr[i] = temp;
         }
-        return Selection_arr;
+        return arr;
     }
 
     @Override
-    public int[] Insertion_sort() {
-        int[] Insertion_arr = Data;
-        for(int i=1;i<Insertion_arr.length;i++){
+    public int[] Insertion_sort(int []arr) {
+        for(int i=1;i<arr.length;i++){
             for(int j=1;j>0;j--){
-                if(Insertion_arr[j-1] > Insertion_arr[j]){
-                    int temp = Insertion_arr[j-1];
-                    Insertion_arr[j-1] = Insertion_arr[j];
-                    Insertion_arr[j] = temp;
+                if(arr[j-1] > arr[j]){
+                    int temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
-        return Insertion_arr;
+        return arr;
     }
 
     @Override
-    public int[] Shell_sort() {//(배열의 길이 n/3) +1
-        int[] Shell_arr = Data;
-        int gap = Shell_arr.length;
+    public int[] Shell_sort(int []arr) {//(배열의 길이 n/3) +1
+        int gap = arr.length;
         while(gap>1){
             gap = (gap/3)+1;
             for(int i=0;i<gap;i++){
-                for(int j=i+gap;j<Shell_arr.length;j += gap){
+                for(int j=i+gap;j<arr.length;j += gap){
                     for(int k=i;k<j;k+=gap){
-                        if(Shell_arr[k] > Shell_arr[j]){
-                            int temp = Shell_arr[k];
-                            Shell_arr[k] = Shell_arr[j];
-                            Shell_arr[j] = temp;
+                        if(arr[k] > arr[j]){
+                            int temp = arr[k];
+                            arr[k] = arr[j];
+                            arr[j] = temp;
                         }
                     }
                 }
             }
         }
-        return Shell_arr;
+        return arr;
     }
 
     @Override
-    public int[] Shell_sort_Ciura() {//ciura 시퀀스 이용
-        int[] Shell_Ciura_arr = Data;
+    public int[] Shell_sort_Ciura(int []arr) {//ciura 시퀀스 이용
         int[] Ciura_Sequence = new int[]{1,4,10,23,57,132,301,701,1750};
         int gap;
         int gap_index=0;
-        int len = (int)(Shell_Ciura_arr.length/2.25);
+        int len = (int)(arr.length/2.25);
         while(Ciura_Sequence[gap_index] <= len){
             gap_index++;
         }
         while(gap_index>1){
             gap = Ciura_Sequence[gap_index];
             for(int i=0;i<gap;i++){
-                for(int j=i+gap;j<Shell_Ciura_arr.length;j += gap){
+                for(int j=i+gap;j<arr.length;j += gap){
                     for(int k=i;k<j;k+=gap){
-                        if(Shell_Ciura_arr[k] > Shell_Ciura_arr[j]){
-                            int temp = Shell_Ciura_arr[k];
-                            Shell_Ciura_arr[k] = Shell_Ciura_arr[j];
-                            Shell_Ciura_arr[j] = temp;
+                        if(arr[k] > arr[j]){
+                            int temp = arr[k];
+                            arr[k] = arr[j];
+                            arr[j] = temp;
                         }
                     }
                 }
             }
             gap_index--;
         }
-        return Shell_Ciura_arr;
+        return arr;
     }
     public void print_arr(int[] arr){
         for(int i=0;i<arr.length;i++){
@@ -156,20 +155,30 @@ public class Sort implements sort_interface{
         System.out.println("배열의 갯수 입력");
         n = s.nextInt();
         Sort sort = new Sort(n);
-        sort.Set_data();
-        System.out.println("-------랜덤배열-------");
-        sort.print_arr(sort.Data);
-        System.out.println("랜덤배열-버블정렬");
-        sort.print_arr(sort.Bubble_sort());
-        System.out.println("랜덤배열-삽입정렬");
-        sort.print_arr(sort.Insertion_sort());
-        System.out.println("랜덤배열-쉘정렬 [(n/3)+1]");
-        sort.print_arr(sort.Shell_sort());
-        System.out.println("랜덤배열-쉘정렬 [Ciura]");
-        sort.print_arr(sort.Shell_sort_Ciura());
-        System.out.println("랜덤배열-선택정렬");
-        sort.print_arr(sort.Selection_sort());
 
+        System.out.println("----------랜덤 데이터 배열----------");
+        int []rand_data = sort.Random_data();
+        sort.print_arr(sort.Bubble_sort(rand_data));
+        sort.print_arr(sort.Selection_sort(rand_data));
+        sort.print_arr(sort.Insertion_sort(rand_data));
+        sort.print_arr(sort.Shell_sort(rand_data));
+        sort.print_arr(sort.Shell_sort_Ciura(rand_data));
+
+        System.out.println("----------내림차순 데이터 배열----------");
+        int []Descend_data = sort.Descended_data();
+        sort.print_arr(sort.Bubble_sort(Descend_data));
+        sort.print_arr(sort.Selection_sort(Descend_data));
+        sort.print_arr(sort.Insertion_sort(Descend_data));
+        sort.print_arr(sort.Shell_sort(Descend_data));
+        sort.print_arr(sort.Shell_sort_Ciura(Descend_data));
+
+        System.out.println("----------느슨한 정렬된 데이터 배열----------");
+        int []Sorted_data = sort.Sorted_data();
+        sort.print_arr(sort.Bubble_sort(Sorted_data));
+        sort.print_arr(sort.Selection_sort(Sorted_data));
+        sort.print_arr(sort.Insertion_sort(Sorted_data));
+        sort.print_arr(sort.Shell_sort(Sorted_data));
+        sort.print_arr(sort.Shell_sort_Ciura(Sorted_data));
     }
 
 

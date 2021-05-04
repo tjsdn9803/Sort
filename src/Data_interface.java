@@ -1,5 +1,5 @@
 public interface Data_interface {
-    public void Set_data();
-    public void Descended_data();
-    public void Sorted_data();
+    public int[] Random_data();
+    public int[] Descended_data();
+    public int[] Sorted_data();
 }
